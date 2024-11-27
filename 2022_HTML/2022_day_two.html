@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+
+    <title>Advent of Code by Nathan</title>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+
+    <link rel="stylesheet" href="css/templatemo-training-studio.css">
+
+    </head>
+    
+    <body>
+    
+   
+    
+    
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="index.html" class="logo">Advent of<em> Code</em></a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="#top" class="active"></a></li>
+
+                        </ul>        
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Main Banner Area Start ***** -->
+    <div class="main-banner" id="top">
+        <div class="bannerImage"></div>
+
+        <div class="video-overlay header-text">
+            <div class="caption" style="padding-top: 100px">
+                <h6>Advent of Code</h6>
+                <h2>By<em> Ling Ling</em></h2>
+                <div class="main-button scroll-to-section">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+
+    <!-- ***** Features Item Start ***** -->
+    <section class="section" id="features">
+        <div class="container">
+            <div class="">
+                <div class="">
+                    <div class="section-heading">
+                        <h2>Day Two<em> Part One</em></h2>
+                        
+                        <p style="padding-top: 10px">The Elves begin to set up camp on the beach. To decide whose tent gets to be closest to the snack storage, a giant Rock Paper Scissors tournament is already in progress.</p>
+                        <p>Appreciative of your help yesterday, one Elf gives you an encrypted strategy guide (your puzzle input) that they say will be sure to help you win. "The first column is what your opponent is going to play: A for Rock, B for Paper, and C for Scissors. The second column--" Suddenly, the Elf is called away to help with someone's tent.</p>
+                        <p>The second column, you reason, must be what you should play in response: X for Rock, Y for Paper, and Z for Scissors. Winning every time would be suspicious, so the responses must have been carefully chosen.</p>
+                        <p>The winner of the whole tournament is the player with the highest score. Your total score is the sum of your scores for each round. The score for a single round is the score for the shape you selected (1 for Rock, 2 for Paper, and 3 for Scissors) plus the score for the outcome of the round (0 if you lost, 3 if the round was a draw, and 6 if you won).</p>
+                        <p>Since you can't be sure if the Elf is trying to help you or trick you, you should calculate the score you would get if you were to follow the strategy guide.</p>
+                        <p><b>What would your total score be if everything goes exactly according to your strategy guide?</b></p>
+
+                    </div>
+                    <div class="section-heading">
+                        <h2>Day Two<em> Part Two</em></h2>
+                        
+                        <p style="padding-top: 10px"></p>
+                        <p>The Elf finishes helping with the tent and sneaks back over to you. "Anyway, the second column says how the round needs to end: X means you need to lose, Y means you need to end the round in a draw, and Z means you need to win. Good luck!"</p>
+                        <p>The total score is still calculated in the same way, but now you need to figure out what shape to choose so the round ends as indicated.</p>
+                        <p><b>Following the Elf's instructions for the second column, what would your total score be if everything goes exactly according to your strategy guide?</b></p>
+
+
+
+
+
+
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <div style="text-align: center">
+    <p>Data:</p>
+    <embed src="/inputFiles/daytwo/inputdaytwo.txt" id="textFile" style="text-align: center">
+    </div>
+    <section>
+        <div class="container" style="text-align: center">
+            <p>The Answer for part one is: </p><span id="PartOne"></span>
+            <p>The Answer for part two is: </p><span id="PartTwo"></span>
+            <script>
+                function readTextFile(file)
+                    {
+                        var rawFile = new XMLHttpRequest();
+                        rawFile.open("GET", file, false);
+                        rawFile.onreadystatechange = function ()
+                        {
+                            if(rawFile.readyState === 4)
+                            {
+                                if(rawFile.status === 200 || rawFile.status == 0)
+                                {
+                                    var allText = rawFile.responseText;
+                                    text = allText;
+                                }
+                            }
+                        }
+                        rawFile.send(null);
+                        return text;
+                        
+                    }
+
+                function partOne(){
+                    let fileData = readTextFile("/inputFiles/daytwo/inputdaytwo.txt");
+                    newArray = fileData.split("\n");
+                    //first column: A = Rock, B = Paper, C = Scissors
+                    //second column: X = Rock, Y = Paper, Z = Scissors (what i should play in response)
+                    //Points for picking: 1 = Rock, 2 = Paper, 3 = Scissors. Extra: 0 = Loss, 3 = Draw, 6 = Win.
+                    var TotalPoints = 0;
+                    for (let i = 0; i < newArray.length; i++) {
+                        //console.log(newArray[i][0] + "    " + newArray[i][2]);
+                        switch(newArray[i][2]){
+                            case 'X':
+                                //console.log("I chose Rock");
+                                switch(newArray[i][0]){
+                                    case 'A':
+                                        TotalPoints += (1 + 3);
+                                        //console.log("They chose Rock");
+                                        break;
+                                    case 'B':
+                                        TotalPoints += (1 + 0);
+                                        //console.log("They chose Paper");
+                                        break;
+                                    case 'C':
+                                        TotalPoints += (1 + 6);
+                                        //console.log("They chose Scissors");
+                                        break;    
+                                }
+                                break;
+                            case 'Y':
+                                //console.log("I chose Paper");
+                                switch(newArray[i][0]){
+                                    case 'A':
+                                        TotalPoints += (2 + 6);
+                                        //console.log("They chose Rock");
+                                        break;
+                                    case 'B':
+                                        TotalPoints += (2 + 3);
+                                        //console.log("They chose Paper");
+                                        break;
+                                    case 'C':
+                                        TotalPoints += (2 + 0);
+                                        //console.log("They chose Scissors");
+                                        break;    
+                                }
+                                break;
+                            case 'Z':
+                                //console.log("I chose Scissors");
+                                switch(newArray[i][0]){
+                                    case 'A':
+                                        TotalPoints += (3 + 0);
+                                        //console.log("They chose Rock");
+                                        break;
+                                    case 'B':
+                                        TotalPoints += (3 + 6);
+                                        //console.log("They chose Paper");
+                                        break;
+                                    case 'C':
+                                        TotalPoints += (3 + 3);
+                                        //console.log("They chose Scissors");
+                                        break;    
+                                }
+                                break;   
+                        }
+                    }
+                    console.log("Total points part one: " + TotalPoints);
+                    document.getElementById('PartOne').innerHTML = TotalPoints;
+                }
+                
+                function partTwo(){
+                    let fileData = readTextFile("/inputFiles/daytwo/inputdaytwo.txt");
+                    newArray = fileData.split("\n");
+                    //I need to: X = Lose, Y = Draw, Z = Win. 
+                    var TotalPoints = 0;
+                    for (let i = 0; i < newArray.length; i++) {
+                        //console.log(newArray[i][0] + "    " + newArray[i][2]);
+                        switch(newArray[i][2]){
+                            case 'X':
+                                //console.log("I Lose");
+                                switch(newArray[i][0]){
+                                    case 'A':
+                                        TotalPoints += (0 + 3);
+                                        //console.log("They chose Rock");
+                                        break;
+                                    case 'B':
+                                        TotalPoints += (0 + 1);
+                                        //console.log("They chose Paper");
+                                        break;
+                                    case 'C':
+                                        TotalPoints += (0 + 2);
+                                        //console.log("They chose Scissors");
+                                        break;    
+                                }
+                                break;
+                            case 'Y':
+                                //console.log("I Draw");
+                                switch(newArray[i][0]){
+                                    case 'A':
+                                        TotalPoints += (3 + 1);
+                                        //console.log("They chose Rock");
+                                        break;
+                                    case 'B':
+                                        TotalPoints += (3 + 2);
+                                        //console.log("They chose Paper");
+                                        break;
+                                    case 'C':
+                                        TotalPoints += (3 + 3);
+                                        //console.log("They chose Scissors");
+                                        break;    
+                                }
+                                break;
+                            case 'Z':
+                                //console.log("I Win");
+                                switch(newArray[i][0]){
+                                    case 'A':
+                                        TotalPoints += (6 + 2);
+                                        //console.log("They chose Rock");
+                                        break;
+                                    case 'B':
+                                        TotalPoints += (6 + 3);
+                                        //console.log("They chose Paper");
+                                        break;
+                                    case 'C':
+                                        TotalPoints += (6 + 1);
+                                        //console.log("They chose Scissors");
+                                        break;    
+                                }
+                                break;   
+                        }
+                    }
+                    console.log("Total points part two: " + TotalPoints);
+                    document.getElementById('PartTwo').innerHTML = TotalPoints;
+                }
+
+
+            window.onload = function() {
+            partOne();
+            partTwo();
+            }
+
+
+            </script>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; LingLing
+                    
+                    - Designed by <a rel="nofollow" href="" class="tm-text-link" target="_parent">LingLing</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- jQuery -->
+    <script src="js/jquery-2.1.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="js/scrollreveal.min.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/imgfix.min.js"></script> 
+    <script src="js/mixitup.js"></script> 
+    <script src="js/accordions.js"></script>
+    
+    <!-- Global Init -->
+    <script src="js/custom.js"></script>
+
+  </body>
+</html>

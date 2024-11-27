@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+
+    <title>Advent of Code by Nathan</title>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+
+    <link rel="stylesheet" href="css/templatemo-training-studio.css">
+
+    </head>
+    
+    <body>
+    
+   
+    
+    
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="index.html" class="logo">Advent of<em> Code</em></a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="#top" class="active"></a></li>
+
+                        </ul>        
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Main Banner Area Start ***** -->
+    <div class="main-banner" id="top">
+        <div class="bannerImage"></div>
+
+        <div class="video-overlay header-text">
+            <div class="caption" style="padding-top: 100px">
+                <h6>Advent of Code</h6>
+                <h2>By<em> Ling Ling</em></h2>
+                <div class="main-button scroll-to-section">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+
+    <!-- ***** Features Item Start ***** -->
+    <section class="section" id="features">
+        <div class="container">
+            <div class="">
+                <div class="">
+                    <div class="section-heading">
+                        <h2>Day One<em> Part One</em></h2>
+                        
+                        <p style="padding-top: 10px">The jungle must be too overgrown and difficult to navigate in vehicles or access from the air; the Elves' expedition traditionally goes on foot. As your boats approach land, the Elves begin taking inventory of their supplies. One important consideration is food - in particular, the number of Calories each Elf is carrying (your puzzle input).</p><p>
+
+                            The Elves take turns writing down the number of Calories contained by the various meals, snacks, rations, etc. that they've brought with them, one item per line. Each Elf separates their own inventory from the previous Elf's inventory (if any) by a blank line.</p>
+                            <p>In case the Elves get hungry and need extra snacks, they need to know which Elf to ask: they'd like to know how many Calories are being carried by the Elf carrying the most Calories.</p><p>
+
+                                <b>Find the Elf carrying the most Calories. How many total Calories is that Elf carrying?</b></p>
+                    </div>
+                    <div class="section-heading">
+                        <h2>Day One<em> Part Two</em></h2>
+                        
+                        <p style="padding-top: 10px">By the time you calculate the answer to the Elves' question, they've already realized that the Elf carrying the most Calories of food might eventually run out of snacks.</p><p>
+
+                            To avoid this unacceptable situation, the Elves would instead like to know the total Calories carried by the top three Elves carrying the most Calories. That way, even if one of those Elves runs out of snacks, they still have two backups.</p>
+                        <p><b>Find the top three Elves carrying the most Calories. How many Calories are those Elves carrying in total?</b></p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <div style="text-align: center">
+    <p>Data:</p>
+    <embed src="/inputFiles/dayone/dayoneinput.txt" id="textFile" style="text-align: center">
+    </div>
+    <section>
+        <div class="container" style="text-align: center">
+            <p>The Answer for part one is: </p><span id="dayOneAnswerPartOne"></span>
+            <p>The Answer for part two is: </p><span id="dayOneAnswerPartTwo"></span>
+            <script>
+   
+                function readTextFile(file)
+                    {
+                        var rawFile = new XMLHttpRequest();
+                        rawFile.open("GET", file, false);
+                        rawFile.onreadystatechange = function ()
+                        {
+                            if(rawFile.readyState === 4)
+                            {
+                                if(rawFile.status === 200 || rawFile.status == 0)
+                                {
+                                    var allText = rawFile.responseText;
+                                    text = allText;
+                                }
+                            }
+                        }
+                        rawFile.send(null);
+                        return text;
+                        
+                    }
+                function partOne(){
+                    let fileData = readTextFile("/inputFiles/dayone/dayoneinput.txt");
+                    newArray = fileData.split("\n");
+                    var runningTotalMax = 0;
+                    var currentTotal = 0;
+                    for (let i = 0; i < newArray.length; i++) {
+                        if(newArray[i] != ''){
+                            currentTotal = currentTotal + (+newArray[i]);
+                        }
+                        else{
+                            runningTotalMax = Math.max(currentTotal, runningTotalMax);
+                            currentTotal = 0;
+                        }
+                    }
+                    if(currentTotal > runningTotalMax){
+                        runningTotalMax = currentTotal;
+                    }
+
+                    console.log(runningTotalMax);
+                    document.getElementById('dayOneAnswerPartOne').innerHTML = runningTotalMax;
+                }
+
+                function partTwo(){
+                    let fileData = readTextFile("dayoneinput.txt");
+                    newArray = fileData.split("\n");
+                    var TotalMaxArray = [];
+                    var currentTotal = 0;
+                    for (let i = 0; i < newArray.length; i++) {
+                        if(newArray[i] != ''){
+                            
+                            currentTotal = currentTotal + (+newArray[i]);
+                            //console.log(currentTotal + "   " + (+newArray[i]));
+                        }
+                        else{
+                            TotalMaxArray.push(+currentTotal);
+                            //console.log("Total is: " + currentTotal);
+                            currentTotal = 0;
+                        }
+                        
+                    }
+                    
+                    
+                    TotalMaxArray.sort((a, b) => a - b).reverse();
+                    let sortedTotalArray =  TotalMaxArray.slice(0, 3);
+                    console.log(sortedTotalArray);
+                    var total = 0;
+                    for (let i = 0; i < sortedTotalArray.length; i++) {
+                        total +=sortedTotalArray[i];
+                    }
+                console.log(total);
+                document.getElementById('dayOneAnswerPartTwo').innerHTML = total;
+
+                }
+
+                function compareNumbers(a, b)
+                {
+                    return a - b;
+                }
+                
+
+
+            window.onload = function() {
+            partOne();
+            partTwo();
+            }
+            </script>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; LingLing
+                    
+                    - Designed by <a rel="nofollow" href="" class="tm-text-link" target="_parent">LingLing</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- jQuery -->
+    <script src="js/jquery-2.1.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="js/scrollreveal.min.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/imgfix.min.js"></script> 
+    <script src="js/mixitup.js"></script> 
+    <script src="js/accordions.js"></script>
+    
+    <!-- Global Init -->
+    <script src="js/custom.js"></script>
+
+  </body>
+</html>

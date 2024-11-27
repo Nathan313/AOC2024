@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+
+    <title>Advent of Code by Nathan</title>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+
+    <link rel="stylesheet" href="css/templatemo-training-studio.css">
+
+    </head>
+    
+    <body>
+    
+   
+    
+    
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="index.html" class="logo">Advent of<em> Code</em></a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="#top" class="active"></a></li>
+
+                        </ul>        
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Main Banner Area Start ***** -->
+    <div class="main-banner" id="top">
+        <div class="bannerImage"></div>
+
+        <div class="video-overlay header-text">
+            <div class="caption" style="padding-top: 100px">
+                <h6>Advent of Code</h6>
+                <h2>By<em> Ling Ling</em></h2>
+                <div class="main-button scroll-to-section">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+
+    <!-- ***** Features Item Start ***** -->
+    <section class="section" id="features">
+        <div class="container">
+            <div class="">
+                <div class="">
+                    <div class="section-heading">
+                        <h2>Day Three<em> Part One</em></h2>
+                        <p style="padding-top: 10px">One Elf has the important job of loading all of the rucksacks with supplies for the jungle journey. Unfortunately, that Elf didn't quite follow the packing instructions, and so a few items now need to be rearranged.</p>
+                        <p>Each rucksack has two large compartments. All items of a given type are meant to go into exactly one of the two compartments. The Elf that did the packing failed to follow this rule for exactly one item type per rucksack.</p>
+                        <p>The Elves have made a list of all of the items currently in each rucksack (your puzzle input), but they need your help finding the errors. Every item type is identified by a single lowercase or uppercase letter (that is, a and A refer to different types of items).</p>
+                        <p>The list of items for each rucksack is given as characters all on a single line. A given rucksack always has the same number of items in each of its two compartments, so the first half of the characters represent items in the first compartment, while the second half of the characters represent items in the second compartment.</p>
+                        <p>The first rucksack contains the items sfDRhjhHsHhgWPJvPmmQnmPqnW, which means its first compartment contains the items sfDRhjhHsHhgW, while the second compartment contains the items PJvPmmQnmPqnW. The only item type that appears in both compartments is uppercase W.</p>
+                        <p>To help prioritize item rearrangement, every item type can be converted to a priority:
+                            Lowercase item types a through z have priorities 1 through 26.
+                            Uppercase item types A through Z have priorities 27 through 52.</p>
+                        <p><b>Find the item type that appears in both compartments of each rucksack. What is the sum of the priorities of those item types?</b></p>
+                    </div>
+                    <div class="section-heading">
+                        <h2>Day Three<em> Part Two</em></h2>
+                        <p style="padding-top: 10px">For safety, the Elves are divided into groups of three. Every Elf carries a badge that identifies their group. For efficiency, within each group of three Elves, the badge is the only item type carried by all three Elves. That is, if a group's badge is item type B, then all three Elves will have item type B somewhere in their rucksack, and at most two of the Elves will be carrying any other item type.</p>
+                        <p>The problem is that someone forgot to put this year's updated authenticity sticker on the badges. All of the badges need to be pulled out of the rucksacks so the new authenticity stickers can be attached.</p>
+                        <p>Additionally, nobody wrote down which item type corresponds to each group's badges. The only way to tell which item type is the right one is by finding the one item type that is common between all three Elves in each group.</p>
+                        <p>Every set of three lines in your list corresponds to a single group, but each group can have a different badge item type.</p>
+                        <p>Find the item type that corresponds to the badges of each three-Elf group.</p>
+                        <p><b>What is the sum of the priorities of those item types?</b></p>
+                        <img src="/inputFiles/daythree/u4g09ny3is3a1.png">
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <div style="text-align: center">
+    <p>Data:</p>
+    <embed src="/inputFiles/daythree/inputdaythree.txt" id="textFile" style="text-align: center">
+    </div>
+    <section>
+        <div class="container" style="text-align: center">
+            <p>The Answer for part one is: </p><span id="PartOne"></span>
+            <p>The Answer for part two is: </p><span id="PartTwo"></span>
+            <script>
+                function readTextFile(file)
+                    {
+                        var rawFile = new XMLHttpRequest();
+                        rawFile.open("GET", file, false);
+                        rawFile.onreadystatechange = function ()
+                        {
+                            if(rawFile.readyState === 4)
+                            {
+                                if(rawFile.status === 200 || rawFile.status == 0)
+                                {
+                                    var allText = rawFile.responseText;
+                                    text = allText;
+                                }
+                            }
+                        }
+                        rawFile.send(null);
+                        return text;
+                        
+                    }
+
+                function partOne(){
+                    let fileData = readTextFile("/inputFiles/daythree/inputdaythree.txt");
+                    newArray = fileData.split("\n");
+                    var totalPriorValue = 0;
+                    for (let i = 0; i < newArray.length; i++) {
+                        subtractValue = 96;
+                        var lengthOfSack = newArray[i].length;
+                        var firstHalf = newArray[i].substr(0,((lengthOfSack/2)));
+                        var secondHalf = newArray[i].substr((lengthOfSack/2));
+                        let commonCharacter = findCharacter(firstHalf, secondHalf);
+                        totalPriorValue = returnValue(commonCharacter, totalPriorValue);
+                    }
+                    document.getElementById('PartOne').innerHTML = totalPriorValue;
+                }
+                function returnValue(commonCharacter, totalPriorValue){
+                    if(commonCharacter == commonCharacter.toUpperCase()){
+                        totalPriorValue += (commonCharacter.charCodeAt(0) - 38);
+                    }
+                    else{
+                        totalPriorValue += (commonCharacter.charCodeAt(0) - 96);
+                    }
+                    return totalPriorValue
+                }
+                function findCharacter(firstHalf, secondHalf) {
+                    for (let i = 0; i < firstHalf.length; i++) {
+                        if(secondHalf.includes(firstHalf[i])){
+                            return firstHalf[i];
+                        }
+                    }
+                }
+                function partTwo(){
+                    let fileData = readTextFile("/inputFiles/daythree/inputdaythree.txt");
+                    newArray = fileData.split("\n");
+                    var totalPriorValue = 0;
+                    for (let i = 0; i < newArray.length; i=i+3) {
+                        var commonFirstTwo = findAllCharacter(newArray[i], newArray[i+1]);
+                        var finalCommon = findCharacter(commonFirstTwo, newArray[i+2]);
+                        totalPriorValue = returnValue(finalCommon, totalPriorValue);
+                    }
+                    document.getElementById('PartTwo').innerHTML = totalPriorValue;
+                }
+                function findAllCharacter(firstHalf, secondHalf) {
+                    var allCommon = '';
+                    for (let i = 0; i < firstHalf.length; i++) {
+                        if(secondHalf.includes(firstHalf[i])){
+                            allCommon = allCommon + firstHalf[i];
+                        }
+                    }
+                    return allCommon;
+                }
+            window.onload = function() {
+            partOne();
+            partTwo();
+            }
+
+
+            </script>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; LingLing
+                    
+                    - Designed by <a rel="nofollow" href="" class="tm-text-link" target="_parent">LingLing</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- jQuery -->
+    <script src="js/jquery-2.1.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="js/scrollreveal.min.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/imgfix.min.js"></script> 
+    <script src="js/mixitup.js"></script> 
+    <script src="js/accordions.js"></script>
+    
+    <!-- Global Init -->
+    <script src="js/custom.js"></script>
+
+  </body>
+</html>
